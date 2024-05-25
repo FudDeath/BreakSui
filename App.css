@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@800&family=Work+Sans:wght@700&display=swap');
+
+.App {
+  display: flex;
+  flex-direction: column; /* Align children vertically */
+  align-items: center; /* Center children horizontally */
+  justify-content: center; /* Center children vertically */
+  height: 100vh;
+  text-align: center;
+  background: radial-gradient(circle, 
+    #8a54fc, 
+    #8464fb, 
+    #7e79f9, 
+    #7a8af4, 
+    #768ef5, 
+    #71a1f3, 
+    #6ab0ef, 
+    #66c2eb, 
+    #62cbeb);
+}
+
+.title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: white;
+  font-size: 3em;
+  width: 100%;
+  margin-bottom: -120px; /* Adjust this value as needed to space from counters */
+}
+
+.counter-container {
+  display: flex;
+  gap: 100px;
+}
+
+.counter {
+  color: white;
+  text-align: center;
+}
+
+.counter h1 {
+  font-size: 13em;
+  font-family: 'TWK Everett', sans-serif;
+  font-weight: 400;
+  margin-bottom: 0; /* Reduce space below h1 */
+}
+
+.counter p {
+  font-size: 2.5em;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  margin-top: 0; /* Reduce space above p */
+}
