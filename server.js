@@ -1,12 +1,12 @@
-import 'dotenv/config';
-import express from 'express';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import { getFullnodeUrl, SuiClient } from '@mysten/sui.js/client';
-import { TransactionBlock } from '@mysten/sui.js/transactions';
-import { Ed25519Keypair } from '@mysten/sui.js/keypairs/ed25519';
-import { decodeSuiPrivateKey } from '@mysten/sui.js/cryptography';
-import axios from 'axios';
+import "dotenv/config";
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+import { getFullnodeUrl, SuiClient } from "@mysten/sui.js/client";
+import { TransactionBlock } from "@mysten/sui.js/transactions";
+import { Ed25519Keypair } from "@mysten/sui.js/keypairs/ed25519";
+import { decodeSuiPrivateKey } from "@mysten/sui.js/cryptography";
+import axios from "axios";
 
 // Needed to simulate __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -25,29 +25,37 @@ function getKeyPairFromExportedPrivateKey(privateKey) {
 
 const fetchTPS = async () => {
   try {
-    console.log('Fetching TPS from API...');
+    console.log("Fetching TPS from API...");
     const apiKey = process.env.API_KEY;
 
-    const response = await axios.get('https://api.blockberry.one/sui/v1/total/values/tps?period=SEC', {
-      headers: {
-        'accept': '*/*',
-        'x-api-key': apiKey
+    const response = await axios.get(
+      "https://api.blockberry.one/sui/v1/total/values/tps?period=SEC",
+      {
+        headers: {
+          accept: "*/*",
+          "x-api-key": apiKey,
+        },
       }
-    });
-    console.log('API Response:', response.data);
+    );
+    console.log("API Response:", response.data);
     tps = response.data;
   } catch (error) {
-    console.error('Error fetching TPS:', error.response ? error.response.data : error.message);
+    console.error(
+      "Error fetching TPS:",
+      error.response ? error.response.data : error.message
+    );
   }
 };
 
 const main = async () => {
   const SENDER_PRIVATE_KEY = process.env.ACC1_PRIVATE_KEY;
   const sender_keypair = getKeyPairFromExportedPrivateKey(SENDER_PRIVATE_KEY);
-  const RECEIVER_PRIVATE_KEY = process.env.ACC2_PRIVATE_KEY || process.env.ACC1_PRIVATE_KEY;
-  const receiver_keypair = getKeyPairFromExportedPrivateKey(RECEIVER_PRIVATE_KEY);
+  const RECEIVER_PRIVATE_KEY =
+    process.env.ACC2_PRIVATE_KEY || process.env.ACC1_PRIVATE_KEY;
+  const receiver_keypair =
+    getKeyPairFromExportedPrivateKey(RECEIVER_PRIVATE_KEY);
   const receiver_address = receiver_keypair.getPublicKey().toSuiAddress();
-  let url = getFullnodeUrl('mainnet');
+  let url = getFullnodeUrl("mainnet");
   if (process.env.URL) {
     url = process.env.URL;
   }
@@ -67,7 +75,11 @@ const main = async () => {
       const bytes = await txb.build({ client: suiClient, limits: {} });
 
       const startTime = performance.now();
-      await suiClient.signAndExecuteTransactionBlock({ signer: sender_keypair, transactionBlock: bytes, options: { showEffects: true } });
+      await suiClient.signAndExecuteTransactionBlock({
+        signer: sender_keypair,
+        transactionBlock: bytes,
+        options: { showEffects: true },
+      });
 
       const endTime = performance.now();
 
@@ -75,9 +87,11 @@ const main = async () => {
 
       console.log(`E2E latency for p2p transfer: ${latency} s`);
     } catch (error) {
-      console.log('Error:', error.message);
+      console.log("Error:", error.message);
     }
-    await new Promise(resolve => setTimeout(resolve, process.env.PING_INTERVAL * 1000));
+    await new Promise((resolve) =>
+      setTimeout(resolve, process.env.PING_INTERVAL * 1000)
+    );
   }
 };
 
@@ -85,17 +99,16 @@ main();
 setInterval(fetchTPS, 5000); // Fetch TPS every 30 seconds
 
 // Serve static files from the React app build directory
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(__dirname, "build")));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-app.get('/metrics', (req, res) => {
+app.get("/metrics", (req, res) => {
   res.json({ tps, latency });
 });
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
