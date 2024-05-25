@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./App.css";
 
 function App() {
   const [metrics, setMetrics] = useState({ tps: 0, latency: 0 });
@@ -8,10 +8,10 @@ function App() {
   useEffect(() => {
     const fetchMetrics = async () => {
       try {
-        const response = await axios.get('/metrics');
+        const response = await axios.get("/metrics");
         setMetrics(response.data);
       } catch (error) {
-        console.error('Error fetching metrics:', error);
+        console.error("Error fetching metrics:", error);
       }
     };
 
@@ -38,4 +38,3 @@ function App() {
 }
 
 export default App;
-
