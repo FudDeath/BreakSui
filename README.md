@@ -25,6 +25,7 @@ npx create-react-app sui-dashboard
 ```
 npm run build
 ```
+in the sui-dashboard directory
 
 ### 4. Copy the generated build folder into your backend directory
 
