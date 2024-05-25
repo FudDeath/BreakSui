@@ -20,24 +20,24 @@ npx create-react-app sui-dashboard
 
 ### 3. Move App.css and App.js from this github to sui-dashboard/src
 
-### 4. Run the command
+### 4. Run the command in the sui-dashboard folder
 
 ```
 npm run build
 ```
-in the sui-dashboard directory
 
 
-### 4. Copy the generated build folder into your backend directory - backend directory should have server.js, index.html, package.json, .env, and the build folder.
+
+### 5. Copy the generated build folder into your backend directory - backend directory should have server.js, index.html, package.json, .env, and the build folder from step 4
 
 
-### 5. Run the command
+### 6. Run the command in the backend folder
 
 ```
 npm install
 ```
 
-### 5. Run the command
+### 7. Run the command in the backend folder
 
 ```
 npm run start
