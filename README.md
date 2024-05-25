@@ -15,5 +15,21 @@ API_KEY=API-KEY from https://api.blockberry.one
 ### 2. Run the command
 
 ```
+npx create-react-app sui-dashboard
+```
+
+### 3. Move App.css and App.js from this github to sui-dashboard/src
+
+### 4. Run the command
+
+```
+npm run build
+```
+
+### 4. Copy the generated build folder into your backend directory
+
+### 5. Run the command
+
+```
 npm run start
 ```
