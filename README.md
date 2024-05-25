@@ -27,10 +27,24 @@ npm run build
 ```
 in the sui-dashboard directory
 
-### 4. Copy the generated build folder into your backend directory
+
+### 4. Copy the generated build folder into your backend directory - backend directory should have server.js, index.html, package.json, .env, and the build folder.
+
+
+### 5. Run the command
+
+```
+npm install
+```
 
 ### 5. Run the command
 
 ```
 npm run start
 ```
+or 
+```
+node server.js
+```
+
+You might have to run this multiple times if you get a fetch error, eventually once a connection is made with suiscan it will run without an error.
